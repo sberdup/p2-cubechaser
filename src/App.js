@@ -8,10 +8,11 @@ function App() {
   const [comments, setComments] = useState([])
 
   async function dataRequest() {
-    let data = await fetch('https://p2-backend-cubechaser.herokuapp.com/comments')
-    data = await data.json()
-    console.log(data)
-    setComments(data)
+    await fetch('https://p2-backend-cubechaser.herokuapp.com/comments')
+    .then(r => r.json())
+    .then(data => {
+      setComments(data[0])
+    })
   }
 
   useEffect(() => {
@@ -20,7 +21,7 @@ function App() {
 
   return (
     <div className="App" >
-      <ShapeArena data={comments} />
+      <ShapeArena data={comments.content} />
     </div>
   );
 }

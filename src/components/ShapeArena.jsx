@@ -40,11 +40,11 @@ export default function ShapeArena({data}) {
         }
         console.log(yourShape)
     }
-    
+
   return (
     <div style={{border:'10px solid red', position:'absolute', top:'10px', left:'10px', width:'1880px', height:'890px'}}>
         <PlayerShape xPos={yourShape.left} yPos={yourShape.top} yourMotion={yourMotion}/>
-        <p>{data[0].content}</p>
+        <p>{data}</p>
     </div>
   )
 }
