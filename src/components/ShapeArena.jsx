@@ -35,6 +35,8 @@ export default function ShapeArena() {
                     setYourShape(prev => ({...prev, top:(prev.top + 10)}))
                 }
                 break
+            default:
+                console.log("What happened?")
         }
         console.log(yourShape)
     }
