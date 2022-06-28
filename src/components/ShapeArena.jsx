@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import PlayerShape from './PlayerShape'
 
-export default function ShapeArena() {
+export default function ShapeArena({data}) {
     const [yourShape, setYourShape] = useState({left:0, top:0})
 
     function yourMotion(direction) {
@@ -40,9 +40,11 @@ export default function ShapeArena() {
         }
         console.log(yourShape)
     }
+    
   return (
     <div style={{border:'10px solid red', position:'absolute', top:'10px', left:'10px', width:'1880px', height:'890px'}}>
         <PlayerShape xPos={yourShape.left} yPos={yourShape.top} yourMotion={yourMotion}/>
+        <p>{data[0].content}</p>
     </div>
   )
 }
