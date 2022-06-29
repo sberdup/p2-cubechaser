@@ -8,7 +8,7 @@ export default function ShapeArena({ data }) {
     const [cubesCollected, setCubesCollected] = useState(0)
 
     // another state to track x-y of power cube component, should be passed as props to that component
-    const [cubePosition, setCubePosition] = useState({ left: 0, top: 0})
+    const [cubePosition, setCubePosition] = useState({ left: 100, top: 100})
 
     // this handles motion of the player element tracking arrows onKeyDown from ShapeArena div
     // bounded to arena walls for now
@@ -51,17 +51,20 @@ export default function ShapeArena({ data }) {
     }
 
     // want this to choose a random place to put a cube on spawn and set new state position so we can hand it as props & re-render cube
-    function spawnCube() {
+    function spawnCube(x = 0) {
         // cube takes its own width into account when choosing random position
         const xPos = Math.random() * 1850
         const yPos = Math.random() * 860
         setCubePosition({left:xPos, top:yPos})
+        if (x === 1) {
+            setCubesCollected(prev => prev + 1)
+        }
     }
 
     return (
         <div style={{ border: '10px solid red', position: 'absolute', top: '10px', left: '10px', width: '1880px', height: '890px' }} tabIndex='0' onKeyDown={e => yourMotion(e.key)}>
             <PlayerShape yourShape={yourShape} />
-            <PowerCube yourShape={yourShape} cubePosition={cubePosition}/>
+            <PowerCube yourShape={yourShape} cubePosition={cubePosition} spawnCube={spawnCube}/>
             <p>{data}</p>
             <h3>You've collected {cubesCollected} cube{(cubesCollected === 1) ? '' : 's'}.</h3>
             {/* test button to trigger cube respawn */}
