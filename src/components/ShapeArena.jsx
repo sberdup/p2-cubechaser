@@ -5,8 +5,9 @@ import PowerCube from './PowerCube';
 
 export default function ShapeArena() {
     // first we track the x-y position of player shape and keep track of score with state
-    const [yourShape, setYourShape] = useState({ left: 300, top: 200 })
+    const [yourPosition, setYourPosition] = useState({ left: 300, top: 200 })
     const [cubesCollected, setCubesCollected] = useState(0)
+    const [yourSpeed, setYourSpeed] = useState(10)
 
     // another state to track x-y of power cube component, should be passed as props to that component
     const [cubePosition, setCubePosition] = useState({ left: 500, top: 500 })
@@ -25,37 +26,37 @@ export default function ShapeArena() {
         // arena boundaries taking a 40px wide player element into account
         switch (direction) {
             case 'ArrowLeft':
-                if (yourShape.left - 10 < 0) {
+                if (yourPosition.left - yourSpeed < 0) {
                     console.log("Can't go through the wall");
                 } else {
-                    setYourShape(prev => ({ ...prev, left: (prev.left - 10) }))
+                    setYourPosition(prev => ({ ...prev, left: (prev.left - yourSpeed) }))
                 }
                 break
             case 'ArrowRight':
-                if (yourShape.left + 10 > (arenaWidth - playerWidth)) {
+                if (yourPosition.left + yourSpeed > (arenaWidth - playerWidth)) {
                     console.log("Can't go through the wall");
                 } else {
-                    setYourShape(prev => ({ ...prev, left: (prev.left + 10) }))
+                    setYourPosition(prev => ({ ...prev, left: (prev.left + yourSpeed) }))
                 }
                 break
             case 'ArrowUp':
-                if (yourShape.top - 10 < 0) {
+                if (yourPosition.top - yourSpeed < 0) {
                     console.log("Can't go through the wall");
                 } else {
-                    setYourShape(prev => ({ ...prev, top: (prev.top - 10) }))
+                    setYourPosition(prev => ({ ...prev, top: (prev.top - yourSpeed) }))
                 }
                 break
             case 'ArrowDown':
-                if (yourShape.top + 10 > (arenaHeight - playerHeight)) {
+                if (yourPosition.top + yourSpeed > (arenaHeight - playerHeight)) {
                     console.log("Can't go through the wall");
                 } else {
-                    setYourShape(prev => ({ ...prev, top: (prev.top + 10) }))
+                    setYourPosition(prev => ({ ...prev, top: (prev.top + yourSpeed) }))
                 }
                 break
             default:
                 console.log("What happened?")
         }
-        console.log(yourShape)
+        console.log(yourPosition)
     }
 
     // want this to choose a random place to put a cube on spawn and set new state position so we can hand it as props & re-render cube
@@ -67,12 +68,24 @@ export default function ShapeArena() {
         if (x === 1) {
             setCubesCollected(prev => prev + 1)
         }
+        if (cubesCollected >= 4) {
+            setYourSpeed(20)
+        }
+        if (cubesCollected >= 9) {
+            setYourSpeed(30)
+        }
+        if (cubesCollected >= 14) {
+            setYourSpeed(40)
+        }
+        if (cubesCollected >= 19) {
+            setYourSpeed(50)
+        }
     }
 
     return (
         <div style={{ border: '10px solid red', position: 'absolute', top: '10px', left: '150px', width: (arenaWidth.toString() + 'px'), height: (arenaHeight.toString() + 'px') }} tabIndex='0' onKeyDown={e => yourMotion(e.key)}>
-            <PlayerShape yourShape={yourShape} width={playerWidth} height={playerHeight} />
-            <PowerCube yourShape={yourShape} cubePosition={cubePosition} spawnCube={spawnCube}
+            <PlayerShape yourShape={yourPosition} width={playerWidth} height={playerHeight} />
+            <PowerCube yourShape={yourPosition} cubePosition={cubePosition} spawnCube={spawnCube}
                 sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight} />
             <Link to='/'>Return to Main Menu</Link>
             <h3>You've collected {cubesCollected} cube{(cubesCollected === 1) ? '' : 's'}.</h3>
