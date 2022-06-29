@@ -12,8 +12,8 @@ export default function PowerCube({yourShape:{left:yourX, top:yourY}, cubePositi
                     spawnCube(1)
                 }
             }
-    }, [yourX, yourY])
-    
+    }, [yourX, yourY, cubeX, cubeY, spawnCube])
+
     return (
         <div
             style={{
