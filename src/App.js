@@ -1,6 +1,9 @@
 import './App.css';
 import ShapeArena from './components/ShapeArena';
 import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom'
+import MainMenu from './routes/MainMenu';
+import ScoreBoard from './routes/ScoreBoard';
 
 function App() {
   console.log('running app')
@@ -9,19 +12,25 @@ function App() {
 
   async function dataRequest() {
     await fetch('https://p2-backend-cubechaser.herokuapp.com/comments')
-    .then(r => r.json())
-    .then(data => {
-      setComments(data[0])
-    })
+      .then(r => r.json())
+      .then(data => {
+        setComments(data[0])
+      })
   }
 
   useEffect(() => {
-   dataRequest()
+    dataRequest()
   }, [])
 
   return (
     <div className="App" >
-      <ShapeArena data={comments.content} />
+      <Routes>
+        <Route path='/' element={<MainMenu />} />
+        <Route path='scores' element={<ScoreBoard data={comments.content} />} />
+        <Route path='game' element={<ShapeArena />} >
+          <Route path='newhighscore' element={<form>Test</form>} />
+        </Route>
+      </Routes>
     </div>
   );
 }

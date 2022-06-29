@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import PlayerShape from './PlayerShape'
 import PowerCube from './PowerCube';
 
-export default function ShapeArena({ data }) {
+export default function ShapeArena() {
     // first we track the x-y position of player shape and keep track of score with state
     const [yourShape, setYourShape] = useState({ left: 0, top: 0 })
     const [cubesCollected, setCubesCollected] = useState(0)
@@ -82,7 +83,7 @@ export default function ShapeArena({ data }) {
         <div style={{ border: '10px solid red', position: 'absolute', top: '10px', left: '10px', width: '1880px', height: '890px' }} tabIndex='0' onKeyDown={e => yourMotion(e.key)}>
             <PlayerShape yourShape={yourShape} />
             <PowerCube yourShape={yourShape} cubePosition={cubePosition} spawnCube={spawnCube}/>
-            <p>{data}</p>
+            <Link to='/'>Return to Main Menu</Link>
             <h3>You've collected {cubesCollected} cube{(cubesCollected === 1) ? '' : 's'}.</h3>
             {/* test button to trigger cube respawn */}
             <button onClick={spawnCube}>New Cube</button>
