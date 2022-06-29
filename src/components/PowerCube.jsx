@@ -3,21 +3,17 @@ import React, {useEffect} from 'react'
 export default function PowerCube({yourShape:{left:yourX, top:yourY}, cubePosition:{left:cubeX, top:cubeY}, spawnCube}) {
     //use effect so we can choose what happens when the component renders, ONCE for now
     //setInterval to serve as a clock to check for collision with player
+    //UPDATE: useEffect with player position as dependencies seems to work better than setInterval
+
     useEffect(() => {
-        setInterval(function() {
             console.log('Your position: x:',yourX, 'y:', yourY, 'Cube position: x:', cubeX, 'y:', cubeY )
             if ((yourX > cubeX - 40)  && (yourX < cubeX + 30)){
                 if ((yourY > cubeY - 30) && (yourY < cubeY + 30)){
                     spawnCube(1)
                 }
             }
-        }, 250)
-
-        return function cleanup(){
-            clearInterval()
-        }
-
-    }, [])
+    }, [yourX, yourY])
+    
     return (
         <div
             style={{
