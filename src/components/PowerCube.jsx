@@ -18,7 +18,7 @@ export default function PowerCube({yourShape:{left:yourX, top:yourY}, cubePositi
         <div
             style={{
                 background:'gold', width: (sideLength.toString() + 'px'), height: (sideLength.toString() + 'px'),
-                position: 'relative', left: (cubeX.toString() + 'px'), top: (cubeY.toString() + 'px')
+                position: 'absolute', left: (cubeX.toString() + 'px'), top: (cubeY.toString() + 'px')
             }}>
             P
         </div>

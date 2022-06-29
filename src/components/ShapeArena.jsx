@@ -5,18 +5,18 @@ import PowerCube from './PowerCube';
 
 export default function ShapeArena() {
     // first we track the x-y position of player shape and keep track of score with state
-    const [yourShape, setYourShape] = useState({ left: 0, top: 0 })
+    const [yourShape, setYourShape] = useState({ left: 300, top: 200 })
     const [cubesCollected, setCubesCollected] = useState(0)
 
     // another state to track x-y of power cube component, should be passed as props to that component
-    const [cubePosition, setCubePosition] = useState({ left: 100, top: 100 })
+    const [cubePosition, setCubePosition] = useState({ left: 500, top: 500 })
 
     let playerWidth, playerHeight, cubeSide, arenaWidth, arenaHeight
     playerWidth = 40
     playerHeight = 30
-    cubeSide = 30
-    arenaWidth = 900
-    arenaHeight = 750
+    cubeSide = 20
+    arenaWidth = 1600
+    arenaHeight = 850
 
     // this handles motion of the player element tracking arrows onKeyDown from ShapeArena div
     // bounded to arena walls for now
@@ -70,7 +70,7 @@ export default function ShapeArena() {
     }
 
     return (
-        <div style={{ border: '10px solid red', margin:'auto', width: (arenaWidth.toString() + 'px'), height: (arenaHeight.toString() + 'px') }} tabIndex='0' onKeyDown={e => yourMotion(e.key)}>
+        <div style={{ border: '10px solid red', position: 'absolute', top: '10px', left: '150px', width: (arenaWidth.toString() + 'px'), height: (arenaHeight.toString() + 'px') }} tabIndex='0' onKeyDown={e => yourMotion(e.key)}>
             <PlayerShape yourShape={yourShape} width={playerWidth} height={playerHeight} />
             <PowerCube yourShape={yourShape} cubePosition={cubePosition} spawnCube={spawnCube}
                 sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight} />
