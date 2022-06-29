@@ -50,23 +50,6 @@ export default function ShapeArena() {
         }
         console.log(yourShape)
     }
-    
-    //Mistakenly used useEffect in PowerCube comp while only depending on cubePosition instead of player position
-    // useEffect(() => {
-    //     setInterval(function() {
-    //         console.log('Your position: x:',yourShape.left, 'y:', yourShape.top, 'Cube position: x:', cubePosition.left, 'y:', cubePosition.top )
-    //         if ((yourShape.left > cubePosition.left - 40)  && (yourShape.left < cubePosition.left + 30)){
-    //             if ((yourShape.top > cubePosition.top - 30) && (yourShape.top < cubePosition.top + 30)){
-    //                 spawnCube(1)
-    //             }
-    //         }
-    //     }, 2000)
-
-    //     return function cleanup(){
-    //         clearInterval()
-    //     }
-
-    // }, [cubePosition])
 
     // want this to choose a random place to put a cube on spawn and set new state position so we can hand it as props & re-render cube
     function spawnCube(x = 0) {
