@@ -3,10 +3,18 @@ import PlayerShape from './PlayerShape'
 import PowerCube from './PowerCube';
 
 export default function ShapeArena({ data }) {
+    // first we track the x-y position of player shape and keep track of score with state
     const [yourShape, setYourShape] = useState({ left: 0, top: 0 })
+    const [cubesCollected, setCubesCollected] = useState(0)
 
+    // another state to track x-y of power cube component, should be passed as props to that component
+    const [cubePosition, setCubePosition] = useState({ left: 0, top: 0})
+
+    // this handles motion of the player element tracking arrows onKeyDown from ShapeArena div
+    // bounded to arena walls for now
     function yourMotion(direction) {
         console.log(direction)
+        // arena boundaries taking a 40px wide player element into account
         switch (direction) {
             case 'ArrowLeft':
                 if (yourShape.left - 10 < 0) {
@@ -42,11 +50,22 @@ export default function ShapeArena({ data }) {
         console.log(yourShape)
     }
 
+    // want this to choose a random place to put a cube on spawn and set new state position so we can hand it as props & re-render cube
+    function spawnCube() {
+        // cube takes its own width into account when choosing random position
+        const xPos = Math.random() * 1850
+        const yPos = Math.random() * 860
+        setCubePosition({left:xPos, top:yPos})
+    }
+
     return (
         <div style={{ border: '10px solid red', position: 'absolute', top: '10px', left: '10px', width: '1880px', height: '890px' }} tabIndex='0' onKeyDown={e => yourMotion(e.key)}>
-            <PlayerShape xPos={yourShape.left} yPos={yourShape.top} />
-            <PowerCube yourShape={yourShape} />
+            <PlayerShape yourShape={yourShape} />
+            <PowerCube yourShape={yourShape} cubePosition={cubePosition}/>
             <p>{data}</p>
+            <h3>You've collected {cubesCollected} cube{(cubesCollected === 1) ? '' : 's'}.</h3>
+            {/* test button to trigger cube respawn */}
+            <button onClick={spawnCube}>New Cube</button>
         </div>
     )
 }

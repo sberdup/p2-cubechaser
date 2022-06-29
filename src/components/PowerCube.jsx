@@ -1,13 +1,12 @@
 import React from 'react'
 
-export default function PowerCube({yourShape}) {
+export default function PowerCube({yourShape, cubePosition:{left, top}}) {
     return (
         <div
             style={{
                 background:'gold', width: '30px', height: '30px',
-                position: 'absolute', left: '100px', top: '100px'
-            }}
-            tabIndex='0'>
+                position: 'absolute', left: (left.toString() + 'px'), top: (top.toString() + 'px')
+            }}>
             P
         </div>
     )

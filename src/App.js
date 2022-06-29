@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 function App() {
   console.log('running app')
-  
+  // test data to make sure backend is working for now
   const [comments, setComments] = useState([])
 
   async function dataRequest() {
