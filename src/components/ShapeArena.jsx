@@ -68,19 +68,21 @@ export default function ShapeArena() {
         if (x === 1) {
             setCubesCollected(prev => prev + 1)
         }
-        if (cubesCollected >= 4) {
+        // adding 1 since state doesn't get updated after the last statement
+        if (cubesCollected + 1 >= 5) {
             setYourSpeed(20)
         }
-        if (cubesCollected >= 9) {
+        if (cubesCollected + 1 >= 10) {
             setYourSpeed(30)
         }
-        if (cubesCollected >= 14) {
+        if (cubesCollected + 1 >= 15) {
             setYourSpeed(40)
         }
-        if (cubesCollected >= 19) {
+        if (cubesCollected + 1 >= 20) {
             setYourSpeed(50)
         }
     }
+
 
     return (
         <div style={{ border: '10px solid red', position: 'absolute', top: '10px', left: '150px', width: (arenaWidth.toString() + 'px'), height: (arenaHeight.toString() + 'px') }} tabIndex='0' onKeyDown={e => yourMotion(e.key)}>
