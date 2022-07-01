@@ -4,11 +4,11 @@ import PlayerShape from './PlayerShape'
 import PowerCube from './PowerCube';
 import DeathCube from './DeathCube';
 
-export default function ShapeArena() {
+export default function ShapeArena({ cubesCollected, setCubesCollected }) {
     // first we track the x-y position of player shape and keep track of score with state
     const [yourPosition, setYourPosition] = useState({ left: 300, top: 200 })
-    const [cubesCollected, setCubesCollected] = useState(0)
     const [yourSpeed, setYourSpeed] = useState(10)
+    const [gameState, setGameState] = useState('running')
 
     // another state to track x-y of power cube component, should be passed as props to that component
     const [cubePosition, setCubePosition] = useState({ left: 500, top: 500 })
@@ -84,18 +84,19 @@ export default function ShapeArena() {
         }
     }
 
-    function touchDeathCube(){
-        
+    function touchDeathCube() {
+        setGameState('end')
     }
 
     return (
-        <div style={{ border: '10px solid blue', position: 'absolute', top: '10px', left: '150px', width: (arenaWidth.toString() + 'px'), height: (arenaHeight.toString() + 'px') }} tabIndex='0' onKeyDown={e => yourMotion(e.key)}>
+        <div id='gameArena' style={{width: (arenaWidth.toString() + 'px'), height: (arenaHeight.toString() + 'px') }}
+            tabIndex='0' onKeyDown={e => yourMotion(e.key)}>
             <PlayerShape yourShape={yourPosition} width={playerWidth} height={playerHeight} />
             <PowerCube yourShape={yourPosition} cubePosition={cubePosition} spawnCube={spawnCube}
                 sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight} />
 
             {(cubesCollected >= 1) ? <DeathCube yourShape={yourPosition} sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight}
-                arenaHeight={arenaHeight} arenaWidth={arenaWidth} xStarting={5} yStarting={5} touchDeathCube={touchDeathCube}/>
+                arenaHeight={arenaHeight} arenaWidth={arenaWidth} xStarting={5} yStarting={5} touchDeathCube={touchDeathCube} />
                 : null}
 
             <Link to='/'>Return to Main Menu</Link>

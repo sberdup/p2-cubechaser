@@ -14,14 +14,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #0f3e9c;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .App-link {
@@ -32,7 +32,51 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+#highscoreform>* {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto
+}
+
+#valhalla {
+  color: #2cfe67;
+  animation: 10s fadeIn;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0.05;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+body {
+  background-color: #808080;
+}
+
+#gameArena {
+  background-color: #FFF;
+  border: 10px solid blue;
+  position: relative;
+  top: 10px;
+  left: 150px;
 }
