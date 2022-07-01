@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import PlayerShape from './PlayerShape'
 import PowerCube from './PowerCube';
+import DeathCube from './DeathCube';
 
 export default function ShapeArena() {
     // first we track the x-y position of player shape and keep track of score with state
@@ -11,6 +12,7 @@ export default function ShapeArena() {
 
     // another state to track x-y of power cube component, should be passed as props to that component
     const [cubePosition, setCubePosition] = useState({ left: 500, top: 500 })
+    const [deathCubePosition, setDeathCubePosition] = useState({ left: 600, top: 600 })
 
     let playerWidth, playerHeight, cubeSide, arenaWidth, arenaHeight
     playerWidth = 40
@@ -85,10 +87,15 @@ export default function ShapeArena() {
 
 
     return (
-        <div style={{ border: '10px solid red', position: 'absolute', top: '10px', left: '150px', width: (arenaWidth.toString() + 'px'), height: (arenaHeight.toString() + 'px') }} tabIndex='0' onKeyDown={e => yourMotion(e.key)}>
+        <div style={{ border: '10px solid blue', position: 'absolute', top: '10px', left: '150px', width: (arenaWidth.toString() + 'px'), height: (arenaHeight.toString() + 'px') }} tabIndex='0' onKeyDown={e => yourMotion(e.key)}>
             <PlayerShape yourShape={yourPosition} width={playerWidth} height={playerHeight} />
             <PowerCube yourShape={yourPosition} cubePosition={cubePosition} spawnCube={spawnCube}
                 sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight} />
+
+            {(cubesCollected >= 1) ? <DeathCube yourShape={yourPosition} sideLength={cubeSide}
+                playerWidth={playerWidth} playerHeight={playerHeight} arenaHeight={arenaHeight} arenaWidth={arenaWidth} />
+                : null}
+
             <Link to='/'>Return to Main Menu</Link>
             <h3>You've collected {cubesCollected} cube{(cubesCollected === 1) ? '' : 's'}.</h3>
             {/* test button to trigger cube respawn */}
