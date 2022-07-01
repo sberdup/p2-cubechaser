@@ -32,7 +32,7 @@ export default function DeathCube({ yourShape: { left: yourX, top: yourY },
                 console.log("Going ", ySpeed.current, " units in Y");
                 setDeathCubePosition(prev => ({ ...prev, top: (prev.top + ySpeed.current) }))
             }
-            console.log(deathCubePosition.left, deathCubePosition.top)
+            console.log(xSpeed.current, ySpeed.current)
         }, 25)
 
         return function cleanup() {

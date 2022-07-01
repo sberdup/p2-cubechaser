@@ -26,7 +26,6 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
     // this handles motion of the player element tracking arrows onKeyDown from ShapeArena div
     // bounded to arena walls for now
     function yourMotion(direction) {
-        console.log(direction)
         // arena boundaries taking a 40px wide player element into account
         switch (direction) {
             case 'ArrowLeft':
@@ -60,7 +59,7 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
             default:
                 console.log("Non-direction pressed")
         }
-        console.log(yourPosition)
+        // console.log(yourPosition)
     }
 
     // want this to choose a random place to put a cube on spawn and set new state position so we can hand it as props & re-render cube
@@ -73,17 +72,20 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
             setCubesCollected(prev => prev + 1)
         }
         // adding 1 since state doesn't get updated after the last statement
-        if (cubesCollected + 1 >= 5) {
+        if (cubesCollected + 1 >= 3) {
             setYourSpeed(15)
         }
-        if (cubesCollected + 1 >= 10) {
-            setYourSpeed(30)
-        }
         if (cubesCollected + 1 >= 15) {
+            setYourSpeed(25)
+        }
+        if (cubesCollected + 1 >= 30) {
             setYourSpeed(40)
         }
-        if (cubesCollected + 1 >= 20) {
+        if (cubesCollected + 1 >= 40) {
             setYourSpeed(50)
+        }
+        if (cubesCollected + 1 >= 60) {
+            setYourSpeed(60)
         }
     }
     
@@ -97,9 +99,18 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
             <PlayerShape yourShape={yourPosition} width={playerWidth} height={playerHeight} />
             <PowerCube yourShape={yourPosition} cubePosition={cubePosition} spawnCube={spawnCube}
                 sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight} />
-
+            {/* 4(for now) discrete components with different initial starting speed scalars. Should also scale with player speed */}
             {(cubesCollected >= 1) ? <DeathCube yourShape={yourPosition} sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight}
-                arenaHeight={arenaHeight} arenaWidth={arenaWidth} xStarting={yourSpeed/2} yStarting={yourSpeed/2} touchDeathCube={touchDeathCube} />
+                arenaHeight={arenaHeight} arenaWidth={arenaWidth} xStarting={5} yStarting={5} touchDeathCube={touchDeathCube} />
+                : null}
+            {(cubesCollected >= 7) ? <DeathCube yourShape={yourPosition} sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight}
+                arenaHeight={arenaHeight} arenaWidth={arenaWidth} xStarting={10} yStarting={10} touchDeathCube={touchDeathCube} />
+                : null}
+            {(cubesCollected >= 25) ? <DeathCube yourShape={yourPosition} sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight}
+                arenaHeight={arenaHeight} arenaWidth={arenaWidth} xStarting={15} yStarting={15} touchDeathCube={touchDeathCube} />
+                : null}
+            {(cubesCollected >= 50) ? <DeathCube yourShape={yourPosition} sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight}
+                arenaHeight={arenaHeight} arenaWidth={arenaWidth} xStarting={25} yStarting={25} touchDeathCube={touchDeathCube} />
                 : null}
 
             <Link to='/' onClick={() => setCubesCollected(0)}>Return to Main Menu</Link>
