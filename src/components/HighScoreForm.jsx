@@ -1,7 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
-export default function HighScoreForm({ cubesCollected }) {
-    function submitHandler(e) {
+export default function HighScoreForm({ cubesCollected, highScoreUpdater }) {
+    let navigate = useNavigate()
+
+    async function submitHandler(e) {
         e.preventDefault()
         const player = e.target.childNodes[1].value
         console.log(player)
@@ -10,18 +13,20 @@ export default function HighScoreForm({ cubesCollected }) {
 
         const playerObject = { 'player': player, 'score': cubesCollected }
 
-        fetch('https://p2-backend-cubechaser.herokuapp.com/highscores', {
+        const resp = await fetch('https://p2-backend-cubechaser.herokuapp.com/highscores', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(playerObject)
         })
-        .then(r => r.json())
-        .then(data => {
-            console.log('Success', data)
-        })
-        .catch(error => {
-            console.error('Error', error)
-        })
+        const data = await resp.json()
+        if (data.result === null) {
+            console.log('retrieving data')
+          }
+        highScoreUpdater(playerObject)
+        navigate('/scores')
+        // .catch(error => {
+        //     console.error('Error', error)
+        // })
     }
     return (
         <div id='highscorebackground'>

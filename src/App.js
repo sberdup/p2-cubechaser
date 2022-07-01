@@ -15,12 +15,18 @@ function App() {
 
 
   async function dataRequest() {
-    await fetch('https://p2-backend-cubechaser.herokuapp.com/highscores')
-      .then(r => r.json())
-      .then(data => {
-        console.log(data)
-        setHighScores(data)
-      })
+    const resp = await fetch('https://p2-backend-cubechaser.herokuapp.com/highscores')
+    const data = await resp.json()
+    if (data.result === null) {
+      console.log('retrieving data')
+    }
+    console.log(data)
+    setHighScores(data)
+  }
+
+  function highScoreUpdater(newScore){
+    setHighScores([...highScores, newScore])
+    setCubesCollected(0)
   }
 
   useEffect(() => {
@@ -31,9 +37,9 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/' element={<MainMenu />} />
-        <Route path='scores' element={<ScoreBoard data={highScores} />} />
+        <Route path='scores' element={<ScoreBoard data={highScores} cubesCollected={cubesCollected} />} />
         <Route path='game' element={<ShapeArena cubesCollected={cubesCollected} setCubesCollected={setCubesCollected} />} />
-        <Route path='newhighscore' element={<HighScoreForm cubesCollected={cubesCollected}/>} />
+        <Route path='newhighscore' element={<HighScoreForm cubesCollected={cubesCollected} highScoreUpdater={highScoreUpdater} />} />
       </Routes>
     </div>
   );
