@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PlayerShape from './PlayerShape'
 import PowerCube from './PowerCube';
 import DeathCube from './DeathCube';
@@ -8,7 +8,7 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
     // first we track the x-y position of player shape and keep track of score with state
     const [yourPosition, setYourPosition] = useState({ left: 300, top: 200 })
     const [yourSpeed, setYourSpeed] = useState(10)
-    const [gameState, setGameState] = useState('running')
+    // const [gameState, setGameState] = useState('running')
 
     // another state to track x-y of power cube component, should be passed as props to that component
     const [cubePosition, setCubePosition] = useState({ left: 500, top: 500 })
@@ -19,6 +19,9 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
     cubeSide = 20
     arenaWidth = 1600
     arenaHeight = 850
+
+    //routing variable
+    let navigate = useNavigate()
 
     // this handles motion of the player element tracking arrows onKeyDown from ShapeArena div
     // bounded to arena walls for now
@@ -83,9 +86,9 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
             setYourSpeed(50)
         }
     }
-
+    
     function touchDeathCube() {
-        setGameState('end')
+        navigate('/newhighscore')
     }
 
     return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 
 export default function DeathCube({ yourShape: { left: yourX, top: yourY },
-    sideLength, playerWidth, playerHeight, arenaHeight, arenaWidth, xStarting, yStarting }) {
+    sideLength, playerWidth, playerHeight, arenaHeight, arenaWidth, xStarting, yStarting, touchDeathCube }) {
 
     const [deathCubePosition, setDeathCubePosition] = useState({left:0, top:0})
 
@@ -46,6 +46,7 @@ export default function DeathCube({ yourShape: { left: yourX, top: yourY },
     if ((yourX > deathCubePosition.left - playerWidth) && (yourX < deathCubePosition.left + sideLength)) {
         if ((yourY > deathCubePosition.top - playerHeight) && (yourY < deathCubePosition.top + sideLength)) {
             console.log('You are dead')
+            touchDeathCube()
         }
     }
     return (

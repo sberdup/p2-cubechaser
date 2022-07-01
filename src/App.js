@@ -9,16 +9,17 @@ import HighScoreForm from './components/HighScoreForm';
 function App() {
   console.log('running app')
   // test data to make sure backend is working for now
-  const [comments, setComments] = useState([])
+  const [highScores, setHighScores] = useState([])
   //lifted state from ShapeArena to give to HighScoreForm
   const [cubesCollected, setCubesCollected] = useState(0)
 
 
   async function dataRequest() {
-    await fetch('https://p2-backend-cubechaser.herokuapp.com/comments')
+    await fetch('https://p2-backend-cubechaser.herokuapp.com/highscores')
       .then(r => r.json())
       .then(data => {
-        setComments(data[0])
+        console.log(data)
+        setHighScores(data)
       })
   }
 
@@ -30,7 +31,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/' element={<MainMenu />} />
-        <Route path='scores' element={<ScoreBoard data={comments.content} />} />
+        <Route path='scores' element={<ScoreBoard data={highScores} />} />
         <Route path='game' element={<ShapeArena cubesCollected={cubesCollected} setCubesCollected={setCubesCollected} />} />
         <Route path='newhighscore' element={<HighScoreForm cubesCollected={cubesCollected}/>} />
       </Routes>
