@@ -1,36 +1,50 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
-export default function DeathCube({ yourShape: { left: yourX, top: yourY }, deathPosition: { left: cubeX, top: cubeY },
-    sideLength, playerWidth, playerHeight, arenaHeight, arenaWidth, setDeathPosition }) {
+export default function DeathCube({ yourShape: { left: yourX, top: yourY },
+    sideLength, playerWidth, playerHeight, arenaHeight, arenaWidth, xStarting, yStarting }) {
 
-    const xSpeed = useRef(true)
+    const [deathCubePosition, setDeathCubePosition] = useState({left:0, top:0})
+
+    useEffect(() => {
+        const left = Math.random() * (arenaWidth - sideLength)
+        const top = Math.random() * (arenaHeight - sideLength)
+        setDeathCubePosition({left:left, top:top})
+    }, [arenaHeight, arenaWidth, sideLength])
+
+    const xSpeed = useRef(xStarting)
+    const ySpeed = useRef(yStarting)
 
     useEffect(() => {
         const deathClock = setInterval(() => {
-            console.log(xSpeed.current)
-            if (cubeX + 1 > (arenaWidth - sideLength)) {
-                xSpeed.current = false
-            }
-            if (cubeX - 1 < 0) {
-                xSpeed.current = true
-            }
-            if (xSpeed.current) {
-                console.log("Going right!");
-                setDeathPosition(prev => ({ ...prev, left: (prev.left + 1) }))
+            console.log(xSpeed.current, ySpeed.current)
+
+            if (deathCubePosition.left + xSpeed.current > (arenaWidth - sideLength) || deathCubePosition.left + xSpeed.current < 0) {
+                console.log("Reversing xSpeed!")
+                xSpeed.current = xSpeed.current * -1
             } else {
-                console.log("Going left!")
-                setDeathPosition(prev => ({ ...prev, left: (prev.left - 1) }))
+                console.log("Going ", xSpeed.current, " units in X");
+                setDeathCubePosition(prev => ({ ...prev, left: (prev.left + xSpeed.current) }))
             }
-            console.log(cubeX, cubeY)
+            if (deathCubePosition.top + ySpeed.current > (arenaHeight - sideLength) || deathCubePosition.top + ySpeed.current < 0) {
+                console.log("Reversing ySpeed!")
+                ySpeed.current = ySpeed.current * -1
+            } else {
+                console.log("Going ", ySpeed.current, " units in Y");
+                setDeathCubePosition(prev => ({ ...prev, top: (prev.top + ySpeed.current) }))
+            }
+            console.log(deathCubePosition.left, deathCubePosition.top)
         }, 25)
 
         return function cleanup() {
             clearInterval(deathClock)
         }
-    }, [arenaWidth, cubeX, cubeY, setDeathPosition, sideLength])
+    }, [arenaWidth, arenaHeight, deathCubePosition, setDeathCubePosition, sideLength])
+    //^ not using a cleanup function caused setInterval to infinitely increment speed every time the component was re-rendering
+    //likely too many setIntervals going on at once
 
-    if ((yourX > cubeX - playerWidth) && (yourX < cubeX + sideLength)) {
-        if ((yourY > cubeY - playerHeight) && (yourY < cubeY + sideLength)) {
+    //player collision checker
+    if ((yourX > deathCubePosition.left - playerWidth) && (yourX < deathCubePosition.left + sideLength)) {
+        if ((yourY > deathCubePosition.top - playerHeight) && (yourY < deathCubePosition.top + sideLength)) {
             console.log('You are dead')
         }
     }
@@ -38,7 +52,7 @@ export default function DeathCube({ yourShape: { left: yourX, top: yourY }, deat
         <div
             style={{
                 background: 'red', width: (sideLength.toString() + 'px'), height: (sideLength.toString() + 'px'),
-                position: 'absolute', left: (cubeX.toString() + 'px'), top: (cubeY.toString() + 'px')
+                position: 'absolute', left: (deathCubePosition.left.toString() + 'px'), top: (deathCubePosition.top.toString() + 'px')
             }}>
             D
         </div>
