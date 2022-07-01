@@ -74,7 +74,7 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
         }
         // adding 1 since state doesn't get updated after the last statement
         if (cubesCollected + 1 >= 5) {
-            setYourSpeed(20)
+            setYourSpeed(15)
         }
         if (cubesCollected + 1 >= 10) {
             setYourSpeed(30)
@@ -99,10 +99,10 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
                 sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight} />
 
             {(cubesCollected >= 1) ? <DeathCube yourShape={yourPosition} sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight}
-                arenaHeight={arenaHeight} arenaWidth={arenaWidth} xStarting={5} yStarting={5} touchDeathCube={touchDeathCube} />
+                arenaHeight={arenaHeight} arenaWidth={arenaWidth} xStarting={yourSpeed/2} yStarting={yourSpeed/2} touchDeathCube={touchDeathCube} />
                 : null}
 
-            <Link to='/'>Return to Main Menu</Link>
+            <Link to='/' onClick={() => setCubesCollected(0)}>Return to Main Menu</Link>
             <h3>You've collected {cubesCollected} cube{(cubesCollected === 1) ? '' : 's'}.</h3>
             {/* test button to trigger cube respawn */}
             <button onClick={spawnCube}>New Cube</button>
