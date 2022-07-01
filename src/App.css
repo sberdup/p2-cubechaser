@@ -42,12 +42,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: auto
+  margin: auto;
+  margin-bottom: 1%;
+}
+#highscorebackground {
+  background-color: rgb(12, 16, 15);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left: 0px
 }
 
 #valhalla {
   color: #2cfe67;
-  animation: 10s fadeIn;
+  animation: 7s fadeIn;
   animation-fill-mode: forwards;
 }
 
@@ -56,12 +65,8 @@
     opacity: 0;
   }
 
-  25% {
-    opacity: 0.05;
-  }
-
-  50% {
-    opacity: 0.5;
+  40% {
+    opacity: 0;
   }
 
   100% {
@@ -74,8 +79,9 @@ body {
 }
 
 #gameArena {
-  background-color: #FFF;
-  border: 10px solid blue;
+  background: rgb(45, 195, 34);
+  background: linear-gradient(0deg, rgba(45, 195, 34, 1) 0%, rgba(45, 189, 253, 1) 33%);
+  border: 10px outset burlywood;
   position: relative;
   top: 10px;
   left: 150px;
