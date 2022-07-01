@@ -1,7 +1,7 @@
 import React from 'react'
 import useCollision from '../hooks/useCollision'
 
-export default function PowerCube({ yourShape: { left: yourX, top: yourY }, cubePosition: { left: cubeX, top: cubeY }, spawnCube, sideLength, playerWidth, playerHeight }) {
+export default function PowerCube({ yourShape, cubePosition, spawnCube, sideLength}) {
     //UPDATE: useEffect with player position as dependencies seems to work better than setInterval
     //UPDATE2: useEffect does not appear to be necessary for this component to calculate collision when player position changes
 
@@ -20,6 +20,9 @@ export default function PowerCube({ yourShape: { left: yourX, top: yourY }, cube
     if (collisionState) {
         spawnCube(1)
     }
+
+    const cubeX = cubePosition.left
+    const cubeY = cubePosition.top
 
     return (
         <div
