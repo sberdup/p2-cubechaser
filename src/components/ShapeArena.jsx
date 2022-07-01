@@ -12,7 +12,7 @@ export default function ShapeArena() {
 
     // another state to track x-y of power cube component, should be passed as props to that component
     const [cubePosition, setCubePosition] = useState({ left: 500, top: 500 })
-    const [deathCubePosition, setDeathCubePosition] = useState({ left: 600, top: 600 })
+    const [deathCubePosition, setDeathCubePosition] = useState({ left: 1200, top: 600 })
 
     let playerWidth, playerHeight, cubeSide, arenaWidth, arenaHeight
     playerWidth = 40
@@ -92,7 +92,7 @@ export default function ShapeArena() {
             <PowerCube yourShape={yourPosition} cubePosition={cubePosition} spawnCube={spawnCube}
                 sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight} />
 
-            {(cubesCollected >= 1) ? <DeathCube yourShape={yourPosition} sideLength={cubeSide}
+            {(cubesCollected >= 1) ? <DeathCube yourShape={yourPosition} deathPosition={deathCubePosition} setDeathPosition={setDeathCubePosition} sideLength={cubeSide}
                 playerWidth={playerWidth} playerHeight={playerHeight} arenaHeight={arenaHeight} arenaWidth={arenaWidth} />
                 : null}
 
