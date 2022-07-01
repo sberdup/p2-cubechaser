@@ -8,14 +8,13 @@ export default function PowerCube({ yourShape: { left: yourX, top: yourY }, cube
     //         calculateHit(yourX, yourY)
     // }, [yourX, yourY])
 
-
     if ((yourX > cubeX - playerWidth) && (yourX < cubeX + sideLength)) {
         if ((yourY > cubeY - playerHeight) && (yourY < cubeY + sideLength)) {
             spawnCube(1)
         }
     }
 
-    console.log('Your position: x:',yourX, 'y:', yourY, 'Cube position: x:', cubeX, 'y:', cubeY )
+    // console.log('Your position: x:',yourX, 'y:', yourY, 'Cube position: x:', cubeX, 'y:', cubeY )
 
     return (
         <div
