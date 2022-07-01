@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import PlayerShape from './PlayerShape'
 import PowerCube from './PowerCube';
 
+export let playerWidth = 40
+export let playerHeight = 30
+
 export default function ShapeArena() {
     // first we track the x-y position of player shape and keep track of score with state
     const [yourPosition, setYourPosition] = useState({ left: 300, top: 200 })
@@ -12,9 +15,7 @@ export default function ShapeArena() {
     // another state to track x-y of power cube component, should be passed as props to that component
     const [cubePosition, setCubePosition] = useState({ left: 500, top: 500 })
 
-    let playerWidth, playerHeight, cubeSide, arenaWidth, arenaHeight
-    playerWidth = 40
-    playerHeight = 30
+    let cubeSide, arenaWidth, arenaHeight
     cubeSide = 20
     arenaWidth = 1600
     arenaHeight = 850
@@ -96,5 +97,3 @@ export default function ShapeArena() {
         </div>
     )
 }
-
-export {playerHeight, playerWidth}
