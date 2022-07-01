@@ -96,3 +96,5 @@ export default function ShapeArena() {
         </div>
     )
 }
+
+export {playerHeight, playerWidth}
