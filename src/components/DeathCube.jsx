@@ -19,20 +19,20 @@ export default function DeathCube({ yourShape: { left: yourX, top: yourY },
             console.log(xSpeed.current, ySpeed.current)
 
             if (deathCubePosition.left + xSpeed.current > (arenaWidth - sideLength) || deathCubePosition.left + xSpeed.current < 0) {
-                console.log("Reversing xSpeed!")
+                // console.log("Reversing xSpeed!")
                 xSpeed.current = xSpeed.current * -1
             } else {
-                console.log("Going ", xSpeed.current, " units in X");
+                // console.log("Going ", xSpeed.current, " units in X");
                 setDeathCubePosition(prev => ({ ...prev, left: (prev.left + xSpeed.current) }))
             }
             if (deathCubePosition.top + ySpeed.current > (arenaHeight - sideLength) || deathCubePosition.top + ySpeed.current < 0) {
-                console.log("Reversing ySpeed!")
+                // console.log("Reversing ySpeed!")
                 ySpeed.current = ySpeed.current * -1
             } else {
-                console.log("Going ", ySpeed.current, " units in Y");
+                // console.log("Going ", ySpeed.current, " units in Y");
                 setDeathCubePosition(prev => ({ ...prev, top: (prev.top + ySpeed.current) }))
             }
-            console.log(xSpeed.current, ySpeed.current)
+            // console.log(xSpeed.current, ySpeed.current)
         }, 25)
 
         return function cleanup() {
