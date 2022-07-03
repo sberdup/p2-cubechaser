@@ -102,5 +102,8 @@ td {
 #gametitle {
   font-size: 10em;
   color: green;
-  margin-bottom: 0em;
+  margin-bottom: -0.1em;
+}
+.hidden {
+  display: none;
 }
