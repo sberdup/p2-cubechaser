@@ -81,7 +81,8 @@ body {
 
 #gameArena {
   background: rgb(45, 195, 34);
-  background: -webkit-linear-gradient(top, #accce5 13%,#accce5 13%,#207cca 87%,#38a832 89%,#38a832 89%,#1ea01e 100%);  border: 10px outset burlywood;
+  background: -webkit-linear-gradient(top, #accce5 13%, #accce5 13%, #207cca 87%, #38a832 89%, #38a832 89%, #1ea01e 100%);
+  border: 10px outset burlywood;
   position: relative;
   top: 10px;
   left: 150px;
@@ -101,6 +102,7 @@ td {
   width: 5em;
 }
 
+/* main menu styling */
 #gametitle {
   font-family: OCR A Std, monospace;
   font-size: 10em;
@@ -121,6 +123,22 @@ li {
   font-weight: bold;
 }
 
+/* if player hasn't been able to collect the first cube, a hint will appear */
 #notmoving {
   animation: 12s fadeIn;
+}
+/* css styling from stackoverflow using monospace font and special background to better indicate how many characters can be input */
+#playerNameInput {
+  display: inline-block;
+  margin: 1.2rem auto;
+  border: none;
+  padding: 0;
+  width: 7.5ch;
+  background: repeating-linear-gradient(90deg, rgb(0, 0, 0) 0, rgb(0, 0, 0) 1ch, transparent 0, transparent 1.5ch) 0 100%/ 10ch 2px no-repeat;
+  font: 2rem 'Ubuntu Mono', monospace;
+  letter-spacing: 0.5ch;
+}
+#playerNameInput:focus {
+  outline: none;
+  color: rgb(113, 30, 255);
 }

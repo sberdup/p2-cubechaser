@@ -8,7 +8,7 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
     // first we track the x-y position of player shape and keep track of score with state
     const [yourPosition, setYourPosition] = useState({ left: 780, top: 200 })
     const [yourSpeed, setYourSpeed] = useState(10)
-    const [message, setMessage] = useState({style:{color:'red'}, text:'null'})
+    const [message, setMessage] = useState({style:{color:'red'}, text:''})
 
     // another state to track x-y of power cube component, should be passed as props to that component
     const [cubePosition, setCubePosition] = useState({ left: 790, top: 500 })
@@ -111,7 +111,7 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
             <PlayerShape yourShape={yourPosition} width={playerWidth} height={playerHeight} />
             <PowerCube yourShape={yourPosition} cubePosition={cubePosition} spawnCube={spawnCube}
                 sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight} />
-            {/* 4(for now) discrete components with different initial starting speed scalars. Should also scale with player speed */}
+            {/* 4(for now) discrete components with different initial starting speed scalars.*/}
             {(cubesCollected >= 1) ? <DeathCube yourShape={yourPosition} sideLength={cubeSide} playerWidth={playerWidth} playerHeight={playerHeight}
                 arenaHeight={arenaHeight} arenaWidth={arenaWidth} xStarting={5} yStarting={5} touchDeathCube={touchDeathCube} />
                 : null}
@@ -130,7 +130,7 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
             <h4 id='notmoving' style={cubesCollected === 0 ? null : {display:'none'}}>Click anywhere inside the play area to be able to move.</h4>
             {/* test button to trigger cube respawn */}
             {/* <button onClick={spawnCube}>New Cube</button> */}
-            <h4 style={{position:'absolute', top:'40%', left:'49%', ...message.style}}>{message.text}</h4>
+            <h4 style={{position:'absolute', top:'40%', left:'48%', ...message.style}}>{message.text}</h4>
         </div>
     )
 }

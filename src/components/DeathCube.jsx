@@ -52,10 +52,10 @@ export default function DeathCube({ yourShape: { left: yourX, top: yourY },
     return (
         <div
             style={{
-                background: 'red', width: (sideLength.toString() + 'px'), height: (sideLength.toString() + 'px'),
+                background: 'red', width: (sideLength.toString() + 'px'), height: (sideLength.toString() + 'px'), boxShadow: '0px 0px 20px #000000',
                 position: 'absolute', left: (deathCubePosition.left.toString() + 'px'), top: (deathCubePosition.top.toString() + 'px')
             }}>
-            D
+            <b>☠</b>
         </div>
     )
 }
