@@ -16,7 +16,7 @@ export default function DeathCube({ yourShape: { left: yourX, top: yourY },
 
     useEffect(() => {
         const deathClock = setInterval(() => {
-            console.log(xSpeed.current, ySpeed.current)
+            // console.log(xSpeed.current, ySpeed.current)
 
             if (deathCubePosition.left + xSpeed.current > (arenaWidth - sideLength) || deathCubePosition.left + xSpeed.current < 0) {
                 // console.log("Reversing xSpeed!")

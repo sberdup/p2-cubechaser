@@ -45,6 +45,7 @@
   margin: auto;
   margin-bottom: 1%;
 }
+
 #highscorebackground {
   background-color: rgb(12, 16, 15);
   width: 100vw;
@@ -75,13 +76,12 @@
 }
 
 body {
-  background-color: #c2c2c2;
+  background-color: #b7eeff;
 }
 
 #gameArena {
   background: rgb(45, 195, 34);
-  background: linear-gradient(0deg, rgba(45, 195, 34, 1) 0%, rgba(45, 189, 253, 1) 33%);
-  border: 10px outset burlywood;
+  background: -webkit-linear-gradient(top, #accce5 13%,#accce5 13%,#207cca 87%,#38a832 89%,#38a832 89%,#1ea01e 100%);  border: 10px outset burlywood;
   position: relative;
   top: 10px;
   left: 150px;
@@ -94,16 +94,33 @@ body {
   margin: auto;
   font-size: 2em;
 }
+
 td {
   background-color: #2cfe67;
   padding-bottom: 1em;
   width: 5em;
-} 
-#gametitle {
-  font-size: 10em;
-  color: green;
-  margin-bottom: -0.1em;
 }
+
+#gametitle {
+  font-family: OCR A Std, monospace;
+  font-size: 10em;
+  color: rgb(69, 229, 69);
+  margin-bottom: -0.1em;
+  -webkit-text-stroke: 5px;
+  -webkit-text-stroke-color: rgb(255, 61, 61);
+}
+
 .hidden {
   display: none;
+
+}
+
+li {
+  font-family: 'Arial';
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+#notmoving {
+  animation: 12s fadeIn;
 }

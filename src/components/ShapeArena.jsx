@@ -6,12 +6,12 @@ import DeathCube from './DeathCube';
 
 export default function ShapeArena({ cubesCollected, setCubesCollected }) {
     // first we track the x-y position of player shape and keep track of score with state
-    const [yourPosition, setYourPosition] = useState({ left: 300, top: 200 })
+    const [yourPosition, setYourPosition] = useState({ left: 780, top: 200 })
     const [yourSpeed, setYourSpeed] = useState(10)
-    // const [gameState, setGameState] = useState('running')
+    const [message, setMessage] = useState({style:{color:'red'}, text:'null'})
 
     // another state to track x-y of power cube component, should be passed as props to that component
-    const [cubePosition, setCubePosition] = useState({ left: 500, top: 500 })
+    const [cubePosition, setCubePosition] = useState({ left: 790, top: 500 })
 
     let playerWidth, playerHeight, cubeSide, arenaWidth, arenaHeight
     playerWidth = 40
@@ -72,21 +72,33 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
             setCubesCollected(prev => prev + 1)
         }
         // adding 1 since state doesn't get updated after the last statement
-        if (cubesCollected + 1 >= 3) {
+        if (cubesCollected + 1 === 3) {
             setYourSpeed(15)
+            messagePlayer('yellow','Speed up!')
         }
-        if (cubesCollected + 1 >= 15) {
+        if (cubesCollected + 1 === 15) {
             setYourSpeed(25)
+            messagePlayer('yellow','Speed up!')
         }
-        if (cubesCollected + 1 >= 30) {
+        if (cubesCollected + 1 === 30) {
             setYourSpeed(40)
+            messagePlayer('yellow','Speed up!')
         }
-        if (cubesCollected + 1 >= 40) {
+        if (cubesCollected + 1 === 40) {
             setYourSpeed(50)
+            messagePlayer('yellow','Speed up!')
         }
-        if (cubesCollected + 1 >= 60) {
+        if (cubesCollected + 1 === 60) {
             setYourSpeed(60)
+            messagePlayer('yellow','Max speed! Good luck!')
+
         }
+    }
+
+    function messagePlayer(newColor, newMessage) {
+        setMessage({...message, style:{color:newColor}, text:newMessage})
+        setTimeout(() => setMessage({style:{color:'black'}, text:''}), 2000)
+
     }
     
     function touchDeathCube() {
@@ -115,8 +127,10 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
 
             <Link to='/' onClick={() => setCubesCollected(0)}>Return to Main Menu</Link>
             <h3>You've collected {cubesCollected} cube{(cubesCollected === 1) ? '' : 's'}.</h3>
+            <h4 id='notmoving' style={cubesCollected === 0 ? null : {display:'none'}}>Click anywhere inside the play area to be able to move.</h4>
             {/* test button to trigger cube respawn */}
             {/* <button onClick={spawnCube}>New Cube</button> */}
+            <h4 style={{position:'absolute', top:'40%', left:'49%', ...message.style}}>{message.text}</h4>
         </div>
     )
 }
