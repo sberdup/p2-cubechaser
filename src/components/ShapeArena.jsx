@@ -126,7 +126,7 @@ export default function ShapeArena({ cubesCollected, setCubesCollected }) {
                 : null}
 
             <Link to='/' onClick={() => setCubesCollected(0)}>Return to Main Menu</Link>
-            <h3>You've collected {cubesCollected} cube{(cubesCollected === 1) ? '' : 's'}.</h3>
+            <h3>{cubesCollected} power cube{(cubesCollected === 1) ? '' : 's'} collected.</h3>
             <h4 id='notmoving' style={cubesCollected === 0 ? null : {display:'none'}}>Click anywhere inside the play area to be able to move.</h4>
             {/* test button to trigger cube respawn */}
             {/* <button onClick={spawnCube}>New Cube</button> */}

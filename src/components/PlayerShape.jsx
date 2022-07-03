@@ -11,7 +11,6 @@ export default function PlayerShape({yourShape:{ left:xPos, top:yPos }, width, h
         border: '5px solid #951ED1', background: '#00CC0B', width: (newWidth.toString() + 'px'), height: (newHeight.toString() + 'px'),
         position: 'absolute', left: (xPos.toString() + 'px'), top: (yPos.toString() + 'px'), boxShadow: '2px 4px 5px #000000'
       }}>
-      You
     </div>
   )
 }
